@@ -1,9 +1,9 @@
-import ToDoForm from "./components/ToDoForm/ToDoForm";
+import ToDoDisplay from "./components/ToDoDisplay/ToDoDisplay";
 
 function App() {
   return (
     <div className="App">
-      <h1>To do list.</h1>
+      <ToDoDisplay />
     </div>
   );
 }

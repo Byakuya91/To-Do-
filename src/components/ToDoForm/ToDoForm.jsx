@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const ToDoForm = (props) => {
   //    Steps for the form
@@ -21,6 +22,15 @@ const ToDoForm = (props) => {
   const handleToDoSubmit = (e) => {
     //  prevents the page from reloading
     e.preventDefault();
+
+    // props function from ToDoDisplay
+    props.onSubmit({
+      id: uuidv4(),
+      text: toDoInput,
+    });
+
+    // update the state
+    setToDoInput("");
   };
 
   return (
