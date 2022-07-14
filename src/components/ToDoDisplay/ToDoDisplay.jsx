@@ -18,11 +18,26 @@ const ToDoDisplay = (props) => {
     // update the state
     setToDos(newToDos);
   };
+
+  // Complete ToDos function
+  const completeTodo = (id) => {
+    // define updatedTodo
+    let updatedTodo = todos.map((todo) => {
+      //  Toggling the Todos from true to false
+      if (todo.id === id) {
+        todo.isComplete = !todo.isComplete;
+      }
+      return todo;
+    });
+    // Updating the state variable with updatedTodo
+    setToDos(updatedTodo);
+  };
+
   return (
     <div>
       <h1>What needs to be accomplished Today? </h1>
       <ToDoForm onSubmit={addToDO} />
-      <Todo />
+      <Todo todos={todos} completeTodo={completeTodo} />
     </div>
   );
 };
