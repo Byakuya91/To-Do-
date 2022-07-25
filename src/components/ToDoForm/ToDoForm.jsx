@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const ToDoForm = (props) => {
@@ -9,7 +9,17 @@ const ToDoForm = (props) => {
 
   //  state to modify the variable
 
-  const [toDoInput, setToDoInput] = useState("");
+  const [toDoInput, setToDoInput] = useState(
+    props.edit ? props.edit.value : ""
+  );
+
+  // allows the input box to focus.
+
+  const inputFocusRef = useRef(null);
+
+  useEffect(() => {
+    inputFocusRef.current.focus();
+  });
 
   //   handleChange function
 
@@ -35,14 +45,31 @@ const ToDoForm = (props) => {
 
   return (
     <form className="todo-form" onSubmit={handleToDoSubmit}>
-      <input
-        type="text"
-        placeholder="Enter a task"
-        value={toDoInput}
-        onChange={handleChange}
-        className="todo-input"
-      />
-      <button className="todo-button">Add</button>
+      {props.edit ? (
+        <>
+          <input
+            type="text"
+            placeholder="Update your item"
+            value={toDoInput}
+            onChange={handleChange}
+            ref={inputFocusRef}
+            className="todo-input edit"
+          />
+          <button className="todo-button edit">Update</button>
+        </>
+      ) : (
+        <>
+          <input
+            type="text"
+            placeholder="Enter a task"
+            value={toDoInput}
+            onChange={handleChange}
+            ref={inputFocusRef}
+            className="todo-input"
+          />
+          <button className="todo-button">Add</button>
+        </>
+      )}
     </form>
   );
 };
