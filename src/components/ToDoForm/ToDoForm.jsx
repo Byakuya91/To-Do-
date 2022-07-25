@@ -25,7 +25,7 @@ const ToDoForm = (props) => {
 
     // props function from ToDoDisplay
     props.onSubmit({
-      id: uuidv4(),
+      id: Math.floor(Math.random() * 10000),
       text: toDoInput,
     });
 
